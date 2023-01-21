@@ -5,6 +5,7 @@ import Home from "../../screens/Home";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Feed from "../../screens/Feed";
 import Profile from "../../screens/Profile";
+import TasksScreenStack from "./TasksStack";
 
 // export type RootStackParams = {
 //     Landing,
@@ -36,7 +37,7 @@ const RootStack = () => {
           ),
         }}
         name="Home"
-        component={Home}
+        component={TasksScreenStack}
       />
       <RootBottomStack.Screen
         options={{

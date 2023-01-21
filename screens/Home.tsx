@@ -10,7 +10,7 @@ import CategoryCard from "../components/home/CategoryCard";
 import { Image, ListItem } from "@rneui/base";
 import History from "../components/common/History";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
     Montserrat_600SemiBold,
     Montserrat_400Regular_Italic,
@@ -19,6 +19,10 @@ const Home = () => {
   if (!fontsLoaded) {
     return null;
   }
+
+  const handlePress = (text) => {
+    navigation.push("Task", { id: text });
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -33,7 +37,7 @@ const Home = () => {
         style={styles.img}
       />
       {/* <ProfileCard /> */}
-      <CategoryCard />
+      <CategoryCard handlePress={handlePress} />
       <History />
     </ScrollView>
   );

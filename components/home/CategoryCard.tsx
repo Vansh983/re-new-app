@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from "react-native";
 import React from "react";
 import { Image } from "@rneui/base";
 
@@ -21,21 +28,25 @@ const cats = [
   },
 ];
 
-const Item = ({ text, img }) => {
+const Item = ({ text, img, handlePress }) => {
   return (
-    <View style={styles.container}>
-      <Image style={styles.img} source={{ uri: img }} />
-      <Text style={{ textAlign: "center" }}>{text}</Text>
-    </View>
+    <TouchableWithoutFeedback onPress={() => handlePress(text)}>
+      <View style={styles.container}>
+        <Image style={styles.img} source={{ uri: img }} />
+        <Text style={{ textAlign: "center" }}>{text}</Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
-const CategoryCard = () => {
+const CategoryCard = ({ handlePress }) => {
   return (
     <View>
       <FlatList
         data={cats}
-        renderItem={({ item }) => <Item text={item.text} img={item.img} />}
+        renderItem={({ item }) => (
+          <Item text={item.text} img={item.img} handlePress={handlePress} />
+        )}
         horizontal={false}
         numColumns={2}
       />

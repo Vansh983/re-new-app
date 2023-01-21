@@ -6,22 +6,23 @@ import {
   Montserrat_600SemiBold,
   Montserrat_400Regular,
 } from "@expo-google-fonts/montserrat";
+import { CardStyleInterpolators } from "@react-navigation/stack";
 
 const cats = [
   {
-    text: "Fitness",
+    text: "Go on a walk",
     date: "Yesterday",
   },
   {
-    text: "Skill",
+    text: "Spend time with a loved one",
     date: "2 days ago",
   },
   {
-    text: "Academics",
+    text: "Take a hot bath",
     date: "Yesterday",
   },
   {
-    text: "Wellness",
+    text: "Listen to a new song",
     date: "Yesterday",
   },
 ];
@@ -41,7 +42,7 @@ const Item = ({ text }) => {
   );
 };
 
-const Tasks = () => {
+const Tasks = ({ navigation, route }) => {
   let [fontsLoaded] = useFonts({
     Montserrat_600SemiBold,
     Montserrat_400Regular,
@@ -51,16 +52,15 @@ const Tasks = () => {
     return null;
   }
   return (
-    <View style={{ marginBottom: 70 }}>
-      <Text
-        style={{
-          marginVertical: 20,
-          fontFamily: "Montserrat_600SemiBold",
-          fontSize: 14,
+    <View style={styles.view}>
+      <Image
+        source={{
+          uri: "https://res.cloudinary.com/ddhqwgq8k/image/upload/v1674330886/re-new/image_2_cqi1he.png",
         }}
-      >
-        Recently Completed
-      </Text>
+        style={styles.avatar}
+      />
+      <Text style={styles.heading}>{route.params.id}</Text>
+      <Text style={styles.subhead}>How are you feeling today?</Text>
       <FlatList
         data={cats}
         renderItem={({ item }) => <Item text={item.text} />}
@@ -70,11 +70,16 @@ const Tasks = () => {
 };
 
 const styles = StyleSheet.create({
+  view: {
+    paddingTop: 40,
+    backgroundColor: "#efebf7",
+    flex: 1,
+    paddingHorizontal: "10%",
+  },
   container: {
     borderRadius: 15,
     shadowColor: "#ddd",
     shadowOpacity: 5,
-    backgroundColor: "#F7F3FE",
     width: "45%",
     margin: 5,
     justifyContent: "center",
@@ -89,22 +94,41 @@ const styles = StyleSheet.create({
   },
   user: {
     flexDirection: "row",
-    marginBottom: 6,
+    marginBottom: 16,
     shadowColor: "#dfdfdf",
     shadowOpacity: 35,
     backgroundColor: "#fff",
-    padding: 10,
+    paddingHorizontal: 30,
+    paddingVertical: 35,
     borderRadius: 15,
   },
   image: {
-    width: 30,
-    height: 30,
+    width: 60,
+    height: 60,
     marginRight: 10,
   },
   name: {
-    fontSize: 14,
+    fontSize: 18,
     fontFamily: "Montserrat_400Regular",
     marginTop: 5,
+    width: 200,
+  },
+  heading: {
+    fontFamily: "Montserrat_600SemiBold",
+    fontSize: 40,
+    marginTop: -30,
+  },
+  subhead: {
+    fontFamily: "Montserrat_400Regular_Italic",
+    fontSize: 14,
+    color: "#6b6b6b",
+    marginBottom: 25,
+  },
+  avatar: {
+    height: 55,
+    width: 55,
+
+    marginLeft: 250,
   },
 });
 
