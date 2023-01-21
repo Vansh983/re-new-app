@@ -1,8 +1,11 @@
 # cohere_rest.py
 # https://docs.cohere.ai/reference/generate
 
-# Setting up cohere
+# Setting up cohere and flask
 import cohere
+from flask import Flask
+
+app = Flask(__name__)
 
 co = cohere.Client('bPnEkiW2KeYyupinU83dcN1wKVp4w1Lo1zXx28dC')
 
@@ -31,3 +34,10 @@ response = co.generate(
 tasks = response.generations[0].text
 task_list = [task.strip()[2:] for task in tasks.split("\n")]
 print(task_list[1:])
+
+@app.route("/")
+def hello():
+    return "Hello world!"
+
+if __name__ == '__main__':
+    app.run(debug = True)
