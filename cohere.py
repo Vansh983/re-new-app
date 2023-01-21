@@ -27,4 +27,6 @@ response = co.generate(
     temperature = temperature,
 )
 
-print(response.generations[0].text)
+tasks = response.generations[0].text
+task_list = [task.strip()[2:] for task in tasks.split("\n")]
+print(task_list[1:])
