@@ -46,8 +46,8 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
-    backgroundColor: "#efebf7",
+    paddingVertical: 40,
+    backgroundColor: "#F8F2FE",
     paddingHorizontal: "10%",
   },
   heading: {

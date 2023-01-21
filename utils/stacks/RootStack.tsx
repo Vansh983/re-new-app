@@ -26,6 +26,8 @@ const RootStack = () => {
           paddingTop: 10,
           paddingBottom: 10,
           height: 65,
+          shadowColor: "#eeeeee",
+          shadowOpacity: 5,
         },
         tabBarShowLabel: false,
       }}

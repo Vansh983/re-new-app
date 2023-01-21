@@ -51,7 +51,7 @@ const History = () => {
     return null;
   }
   return (
-    <View style={{ marginBottom: 70 }}>
+    <View>
       <Text
         style={{
           marginVertical: 20,

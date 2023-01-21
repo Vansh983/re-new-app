@@ -72,7 +72,7 @@ const Tasks = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   view: {
     paddingTop: 40,
-    backgroundColor: "#efebf7",
+    backgroundColor: "#F8F2FE",
     flex: 1,
     paddingHorizontal: "10%",
   },
