@@ -4,6 +4,7 @@ import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import RootStack from "./utils/stacks/RootStack";
 
 export default function App() {
+
   return (
     <NavigationContainer>
       <SafeAreaView style={styles.container}>

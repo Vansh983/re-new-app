@@ -2,6 +2,9 @@ import { View, Text } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../../screens/Home";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import Feed from "../../screens/Feed";
+import Profile from "../../screens/Profile";
 
 // export type RootStackParams = {
 //     Landing,
@@ -15,31 +18,43 @@ const RootStack = () => {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { borderRadius: 30, width: "95%" },
+        tabBarStyle: {
+          borderRadius: 30,
+          width: "95%",
+          marginLeft: "2.5%",
+          paddingTop: 10,
+          paddingBottom: 10,
+          height: 65,
+        },
+        tabBarShowLabel: false,
       }}
     >
       <RootBottomStack.Screen
         options={{
-          //   tabBarLabel: "Home",
-          tabBarLabelStyle: { color: "#333", fontSize: 14 },
+          tabBarIcon: ({}) => (
+            <Ionicons name="home-outline" size={30} color="#666" />
+          ),
         }}
         name="Home"
         component={Home}
       />
       <RootBottomStack.Screen
         options={{
-          //   tabBarLabel: "Home",
-          tabBarLabelStyle: { color: "#333", fontSize: 14 },
+          tabBarIcon: ({}) => (
+            <Ionicons name="search-outline" size={30} color="#666" />
+          ),
         }}
         name="Feed"
-        component={Home}
+        component={Feed}
       />
       <RootBottomStack.Screen
         options={{
-          tabBarLabelStyle: { color: "#333", fontSize: 14 },
+          tabBarIcon: ({}) => (
+            <Ionicons name="person-outline" size={30} color="#666" />
+          ),
         }}
         name="Profile"
-        component={Home}
+        component={Profile}
       />
     </RootBottomStack.Navigator>
   );
