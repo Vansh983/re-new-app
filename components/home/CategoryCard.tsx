@@ -8,6 +8,11 @@ import {
 } from "react-native";
 import React from "react";
 import { Image } from "@rneui/base";
+import {
+  useFonts,
+  Montserrat_600SemiBold,
+  Montserrat_400Regular,
+} from "@expo-google-fonts/montserrat";
 
 const cats = [
   {
@@ -29,11 +34,27 @@ const cats = [
 ];
 
 const Item = ({ text, img, handlePress }) => {
+  let [fontsLoaded] = useFonts({
+    Montserrat_600SemiBold,
+    Montserrat_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <TouchableWithoutFeedback onPress={() => handlePress(text)}>
       <View style={styles.container}>
         <Image style={styles.img} source={{ uri: img }} />
-        <Text style={{ textAlign: "center" }}>{text}</Text>
+        <Text
+          style={{
+            textAlign: "center",
+            fontFamily: "Montserrat_400Regular",
+            marginTop: 5,
+          }}
+        >
+          {text}
+        </Text>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -69,7 +90,7 @@ const styles = StyleSheet.create({
   img: {
     flex: 1,
     width: "100%",
-    height: 50,
+    height: 55,
     resizeMode: "contain",
   },
 });
