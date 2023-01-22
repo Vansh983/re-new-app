@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ScrollView,
+  SafeAreaView,
+} from "react-native";
 import React from "react";
 import { Image } from "@rneui/base";
 import {
@@ -51,7 +58,7 @@ const History = () => {
     return null;
   }
   return (
-    <View>
+    <SafeAreaView>
       <Text
         style={{
           marginVertical: 20,
@@ -65,14 +72,14 @@ const History = () => {
         data={cats}
         renderItem={({ item }) => <Item text={item.text} />}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     borderRadius: 15,
-    shadowColor: "#ddd",
+    shadowColor: "#eee",
     shadowOpacity: 5,
     backgroundColor: "#F7F3FE",
     width: "45%",

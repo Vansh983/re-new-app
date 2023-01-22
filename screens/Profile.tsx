@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, SafeAreaView } from "react-native";
 import React from "react";
 import {
   useFonts,
@@ -17,7 +17,7 @@ const Profile = () => {
     return null;
   }
   return (
-    <View style={styles.view}>
+    <SafeAreaView style={styles.view}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Image
           source={{
@@ -57,13 +57,13 @@ const Profile = () => {
           marginBottom: 20,
         }}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   view: {
-    paddingTop: 40,
+    marginTop: 30,
     backgroundColor: "#F8F2FE",
     flex: 1,
     paddingHorizontal: "10%",

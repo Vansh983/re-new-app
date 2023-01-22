@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableWithoutFeedback,
+} from "react-native";
 import React from "react";
 import { Image } from "@rneui/base";
 import {
@@ -6,7 +12,8 @@ import {
   Montserrat_600SemiBold,
   Montserrat_400Regular,
 } from "@expo-google-fonts/montserrat";
-import { CardStyleInterpolators } from "@react-navigation/stack";
+import { useDispatch } from "react-redux";
+import { setStage } from "../src/store/user";
 
 const cats = [
   {
@@ -27,22 +34,29 @@ const cats = [
   },
 ];
 
-const Item = ({ text }) => {
+const Item = ({ text, handlePress }) => {
   return (
-    <View style={styles.user}>
-      <Image
-        style={styles.image}
-        resizeMode="cover"
-        source={{
-          uri: "https://res.cloudinary.com/ddhqwgq8k/image/upload/v1674330886/re-new/Rectangle_15_hcejk0.png",
-        }}
-      />
-      <Text style={styles.name}>{text}</Text>
-    </View>
+    <TouchableWithoutFeedback onPress={() => handlePress()}>
+      <View style={styles.user}>
+        <Image
+          style={styles.image}
+          resizeMode="cover"
+          source={{
+            uri: "https://res.cloudinary.com/ddhqwgq8k/image/upload/v1674330886/re-new/Rectangle_15_hcejk0.png",
+          }}
+        />
+        <Text style={styles.name}>{text}</Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 const Tasks = ({ navigation, route }) => {
+  const dispatch = useDispatch();
+  const handlePress = async () => {
+    await dispatch(setStage(1));
+    navigation.popToTop();
+  };
   let [fontsLoaded] = useFonts({
     Montserrat_600SemiBold,
     Montserrat_400Regular,
@@ -63,7 +77,9 @@ const Tasks = ({ navigation, route }) => {
       <Text style={styles.subhead}>How are you feeling today?</Text>
       <FlatList
         data={cats}
-        renderItem={({ item }) => <Item text={item.text} />}
+        renderItem={({ item }) => (
+          <Item handlePress={handlePress} text={item.text} />
+        )}
       />
     </View>
   );
@@ -78,7 +94,7 @@ const styles = StyleSheet.create({
   },
   container: {
     borderRadius: 15,
-    shadowColor: "#ddd",
+    shadowColor: "#eee",
     shadowOpacity: 5,
     width: "45%",
     margin: 5,
@@ -133,3 +149,6 @@ const styles = StyleSheet.create({
 });
 
 export default Tasks;
+function useSelector(arg0: (state: any) => any): { user: any } {
+  throw new Error("Function not implemented.");
+}

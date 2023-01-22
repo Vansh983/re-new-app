@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   post: {
     borderRadius: 15,
-    shadowColor: "#ddd",
+    shadowColor: "#eee",
     shadowOpacity: 5,
     margin: 5,
     justifyContent: "center",
