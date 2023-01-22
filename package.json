@@ -31,7 +31,8 @@
     "react-navigation": "^4.4.4",
     "react-redux": "^8.0.5",
     "redux": "^4.2.0",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "expo-camera": "~13.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

@@ -11,7 +11,7 @@ export const userSlice = createSlice({
   reducers: {
     setStage(state, action) {
       // @ts-ignore
-      state.user.stage = action;
+      state.user.stage = action.payload;
     },
   },
 });
