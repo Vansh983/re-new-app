@@ -9,7 +9,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { Image } from "@rneui/themed";
 import Post from "../feed/Post";
 
-const Completed = ({ photo }) => {
+const Completed = ({ photo, caption }) => {
   let [fontsLoaded] = useFonts({
     Montserrat_600SemiBold,
     Montserrat_400Regular,
@@ -21,10 +21,9 @@ const Completed = ({ photo }) => {
 
   let post = {
     user: "Jane Doe",
-    caption:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi et dolorem labore saepe minus consequatur",
+    caption: caption,
     time: "3 hours ago",
-    isVerified: null,
+    isVerified: false,
     userimg:
       "https://res.cloudinary.com/ddhqwgq8k/image/upload/v1674330886/re-new/picwish_1_vvretp.png",
     image: photo.uri,

@@ -20,19 +20,19 @@ const Post = ({ post }) => {
   return (
     <View style={styles.post}>
       <View style={styles.user}>
-        <Image
+        {/* <Image
           style={styles.userimg}
           resizeMode="cover"
           source={{
             uri: post.userimg,
           }}
-        />
+        /> */}
         <Text style={styles.name}>{post.user}</Text>
         <Image
           style={styles.tick}
           resizeMode="cover"
           source={
-            post.isVerified
+            post.verified
               ? {
                   uri: "https://res.cloudinary.com/ddhqwgq8k/image/upload/v1674330886/re-new/image_6_ltkkos.png",
                 }
@@ -49,7 +49,7 @@ const Post = ({ post }) => {
         }}
       />
       <Text style={styles.caption}>{post.caption}</Text>
-      <Text style={styles.time}>{post.time}</Text>
+      {/* <Text style={styles.time}>{post.time}</Text> */}
     </View>
   );
 };
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontFamily: "Montserrat_400Regular",
     fontSize: 13,
+    marginBottom: 10,
   },
   time: {
     marginHorizontal: 10,
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
   tick: {
     width: 25,
     height: 25,
-    marginLeft: 45,
+    marginLeft: 75,
   },
 });
 

@@ -12,13 +12,15 @@ const CountdownTimer = () => {
   const [timeLeft, setTimeLeft] = useState<number>(0);
 
   function addHours(date, hours) {
-    date.setTime(date.getTime() + hours * 60 * 60 * 1000);
+    date.setTime(date.getTime() + 60 * 60 * 1000 * 24);
 
     return date;
   }
-  const targetDate = new Date("2023-01-22T23:59:59Z").getTime();
-  const currentDate = new Date().getTime();
-  const distance = targetDate - currentDate;
+  const targetDate = new Date("2023-01-23T23:10:19Z");
+  const currentDate = new Date();
+  // const targetDate = addHours(currentDate, 24);
+  targetDate.setHours(currentDate.getHours() + 24);
+  const distance = targetDate.getTime() - currentDate.getTime();
 
   useEffect(() => {
     const intervalId = setInterval(() => {

@@ -5,7 +5,7 @@ import {
   FlatList,
   TouchableWithoutFeedback,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image } from "@rneui/base";
 import {
   useFonts,
@@ -14,25 +14,7 @@ import {
 } from "@expo-google-fonts/montserrat";
 import { useDispatch } from "react-redux";
 import { setStage } from "../src/store/user";
-
-const cats = [
-  {
-    text: "Go on a walk",
-    date: "Yesterday",
-  },
-  {
-    text: "Spend time with a loved one",
-    date: "2 days ago",
-  },
-  {
-    text: "Take a hot bath",
-    date: "Yesterday",
-  },
-  {
-    text: "Listen to a new song",
-    date: "Yesterday",
-  },
-];
+import axios from "axios";
 
 const Item = ({ text, handlePress }) => {
   return (
@@ -52,11 +34,28 @@ const Item = ({ text, handlePress }) => {
 };
 
 const Tasks = ({ navigation, route }) => {
+  const [cats, setCats] = useState([]);
   const dispatch = useDispatch();
   const handlePress = async () => {
     await dispatch(setStage(1));
     navigation.popToTop();
   };
+
+  useEffect(() => {
+    const handleFetch = async () => {
+      await axios
+        .get(`http://100.65.172.210:105/category/${route.params.id}`)
+        .then((res) => {
+          console.log("====================================");
+          console.log(res.data);
+          console.log("====================================");
+          setCats(res.data);
+        })
+        .catch((e) => console.log(e));
+    };
+    handleFetch();
+  }, []);
+
   let [fontsLoaded] = useFonts({
     Montserrat_600SemiBold,
     Montserrat_400Regular,
@@ -78,7 +77,7 @@ const Tasks = ({ navigation, route }) => {
       <FlatList
         data={cats}
         renderItem={({ item }) => (
-          <Item handlePress={handlePress} text={item.text} />
+          <Item handlePress={handlePress} text={item} />
         )}
       />
     </View>

@@ -7,24 +7,34 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useFonts,
   Montserrat_600SemiBold,
   Montserrat_400Regular_Italic,
 } from "@expo-google-fonts/montserrat";
 import CategoryCard from "../components/home/CategoryCard";
-import { Button, Image, ListItem } from "@rneui/base";
+import { Button, Image, ListItem, Overlay } from "@rneui/base";
 import History from "../components/common/History";
 import InProgress from "../components/home/InProgress";
 import Completed from "../components/home/Completed";
 import { useSelector, useDispatch } from "react-redux";
 import { setStage } from "../src/store/user";
 import { Camera } from "expo-camera";
+import axios from "axios";
+import { ButtonGroup, Input } from "@rneui/themed";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Home = ({ navigation }) => {
   const { user } = useSelector((state) => state?.user);
   const dispatch = useDispatch();
+
+  let formD = new FormData();
+
+  // const [formd, setFormd] = useState({
+  //   user: "janedoe",
+  //   caption: "test",
+  // });
 
   console.log(user);
 
@@ -35,6 +45,8 @@ const Home = ({ navigation }) => {
   const [startCamera, setStartCamera] = React.useState(false);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [capturedImage, setCapturedImage] = useState<any>(null);
+  const [showCaption, setShowCaption] = useState(false);
+  const [caption, setCaption] = useState("");
   const [cameraType, setCameraType] = React.useState(
     Camera.Constants.Type.back
   );
@@ -53,7 +65,7 @@ const Home = ({ navigation }) => {
 
   const __takePicture = async () => {
     if (!camera) return;
-    const photo = await camera.takePictureAsync();
+    const photo = await camera.takePictureAsync({ base64: true });
     console.log(photo);
     setPreviewVisible(true);
     setCapturedImage(photo);
@@ -80,10 +92,32 @@ const Home = ({ navigation }) => {
       setFlashMode("auto");
     }
   };
-  const __savePhoto = () => {
+  const __savePhoto = async () => {
     setStartCamera(false);
     setPreviewVisible(false);
-    dispatch(setStage(2));
+    setShowCaption(true);
+    formD.append("image", capturedImage.base64);
+    formD.append("user", "janedoe");
+    formD.append("caption", "test");
+    //@ts-ignore
+    // setFormd({ ...formd, image: capturedImage.base64 });
+    await dispatch(setStage(2));
+    // await axios
+    //   .post("http://100.65.172.210:105/upload", formD)
+    //   .then((res) => {
+    //     console.log("====================================");
+    //     console.log(res.data.data);
+    //     console.log("====================================");
+    //   })
+    //   .catch((e) => console.log(e));
+  };
+  // useEffect(() => {
+  //   const handleSubmit = async () => {};
+  //   handleSubmit();
+  // }, [formd]);
+
+  const toggleCaption = () => {
+    setShowCaption(!showCaption);
   };
 
   const CameraPreview = ({ photo }: any) => {
@@ -262,8 +296,63 @@ const Home = ({ navigation }) => {
               />
               {user.stage === 0 && <CategoryCard handlePress={handlePress} />}
               {user.stage === 1 && <InProgress __startCamera={__startCamera} />}
-              {user.stage === 2 && <Completed photo={capturedImage} />}
-              {user.stage > 0 && (
+              {user.stage === 3 && (
+                <Completed photo={capturedImage} caption={caption} />
+              )}
+              {user.stage === 2 && (
+                <View style={styles.card}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      borderBottomColor: "#ddd",
+                      paddingBottom: 10,
+                      borderBottomWidth: 1,
+                    }}
+                  >
+                    <Text style={styles.name}>
+                      Write a caption for your accomplishment!
+                    </Text>
+                  </View>
+                  {/* <Image
+                      source={{ uri: capturedImage?.uri }}
+                      style={styles.image}
+                    /> */}
+                  <Input
+                    style={styles.caption}
+                    onChangeText={(value) => setCaption(value)}
+                  />
+                  <View style={{ flexDirection: "row" }}>
+                    <Button
+                      title={"Cancel"}
+                      buttonStyle={{
+                        borderColor: "rgba(78, 116, 289, 1)",
+                      }}
+                      type="outline"
+                      titleStyle={{ color: "rgba(78, 116, 289, 1)" }}
+                      containerStyle={{
+                        width: 100,
+                        marginVertical: 10,
+                        marginLeft: 10,
+                      }}
+                      onPress={() => dispatch(setStage(1))}
+                    />
+                    <Button
+                      title="Save"
+                      buttonStyle={{
+                        backgroundColor: "rgba(78, 116, 289, 1)",
+                        borderRadius: 3,
+                      }}
+                      containerStyle={{
+                        width: 100,
+                        marginLeft: 60,
+                        marginVertical: 10,
+                      }}
+                      onPress={() => dispatch(setStage(3))}
+                    />
+                  </View>
+                </View>
+              )}
+              {user.stage > 0 && user.stage !== 2 && (
                 <Image
                   onPress={() => dispatch(setStage(0))}
                   source={{
@@ -272,7 +361,7 @@ const Home = ({ navigation }) => {
                   style={styles.bannerC}
                 />
               )}
-              <History />
+              {user.stage !== 2 && <History />}
             </ScrollView>
           )}
         </>
@@ -309,6 +398,35 @@ const styles = StyleSheet.create({
     height: 150,
     resizeMode: "contain",
     borderRadius: 15,
+  },
+  card: {
+    marginBottom: 2,
+    backgroundColor: "#fff",
+    paddingHorizontal: 15,
+    paddingVertical: 15,
+    borderRadius: 15,
+    shadowColor: "#eeeeee",
+    shadowOpacity: 5,
+  },
+
+  name: {
+    fontSize: 15,
+    fontFamily: "Montserrat_600SemiBold",
+    marginTop: 5,
+  },
+  caption: {
+    marginHorizontal: 0,
+    marginTop: 15,
+    fontFamily: "Montserrat_400Regular",
+    fontSize: 11,
+  },
+  image: {
+    width: "100%",
+    height: 250,
+    resizeMode: "cover",
+  },
+  button: {
+    color: "#000",
   },
 });
 

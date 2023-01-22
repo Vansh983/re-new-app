@@ -16,19 +16,19 @@ import {
 
 const cats = [
   {
-    text: "Fitness",
+    text: "Learn how to use co:here API",
     date: "Yesterday",
   },
   {
-    text: "Skill",
+    text: "Meditate for 5 minutes",
     date: "2 days ago",
   },
   {
-    text: "Academics",
+    text: "Do 5 pushups",
     date: "Yesterday",
   },
   {
-    text: "Wellness",
+    text: "Read 10 pages of a book",
     date: "Yesterday",
   },
 ];

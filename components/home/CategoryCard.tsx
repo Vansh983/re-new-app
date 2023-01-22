@@ -25,7 +25,7 @@ const cats = [
   },
   {
     img: "https://res.cloudinary.com/ddhqwgq8k/image/upload/v1674330886/re-new/Mask_group_1_mrfict.png",
-    text: "Academics",
+    text: "Academic",
   },
   {
     img: "https://res.cloudinary.com/ddhqwgq8k/image/upload/v1674330885/re-new/Ellipse_5_ve7pmc.png",
