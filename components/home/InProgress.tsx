@@ -72,7 +72,7 @@ const InProgress = ({ __startCamera }) => {
             borderBottomWidth: 1,
           }}
         >
-          <Text style={styles.name}>Wellness Task: In Progress!</Text>
+          <Text style={styles.name}>Task: In Progress!</Text>
           <Ionicons
             name="time-outline"
             size={25}
@@ -81,8 +81,8 @@ const InProgress = ({ __startCamera }) => {
           />
         </View>
         <Text style={styles.caption}>
-          Thank you Jane, you selected your wellness task for the day! You are
-          getting closer to re:inventing a new you.
+          Thank you Jane, you selected your task for the day! You are getting
+          closer to re:inventing a new you.
         </Text>
         <CountdownTimer />
         <Image

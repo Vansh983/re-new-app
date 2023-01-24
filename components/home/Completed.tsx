@@ -39,7 +39,7 @@ const Completed = ({ photo, caption }) => {
             borderBottomWidth: 1,
           }}
         >
-          <Text style={styles.name}>Wellness Task: Completed!</Text>
+          <Text style={styles.name}>Task: Completed!</Text>
           <Ionicons
             name="checkmark-circle-outline"
             size={25}
@@ -48,7 +48,7 @@ const Completed = ({ photo, caption }) => {
           />
         </View>
         <Text style={styles.caption}>
-          Thank you Jane, you selected your wellness task for the day! You are
+          Thank you Jane, you selected your task for the day! You are
           getting closer to re:inventing a new you.
         </Text>
       </View>

@@ -34,27 +34,33 @@ const Item = ({ text, handlePress }) => {
 };
 
 const Tasks = ({ navigation, route }) => {
-  const [cats, setCats] = useState([]);
+  // const [cats, setCats] = useState([]);
+  const cats = [
+    "Go on a walk",
+    "Spend time with a loved one",
+    "Take a hot bath",
+    "Listen to a new song",
+  ];
   const dispatch = useDispatch();
   const handlePress = async () => {
     await dispatch(setStage(1));
     navigation.popToTop();
   };
 
-  useEffect(() => {
-    const handleFetch = async () => {
-      await axios
-        .get(`http://100.65.172.210:105/category/${route.params.id}`)
-        .then((res) => {
-          console.log("====================================");
-          console.log(res.data);
-          console.log("====================================");
-          setCats(res.data);
-        })
-        .catch((e) => console.log(e));
-    };
-    handleFetch();
-  }, []);
+  // useEffect(() => {
+  //   const handleFetch = async () => {
+  //     await axios
+  //       .get(`http://100.65.172.210:105/category/${route.params.id}`)
+  //       .then((res) => {
+  //         console.log("====================================");
+  //         console.log(res.data);
+  //         console.log("====================================");
+  //         setCats(res.data);
+  //       })
+  //       .catch((e) => console.log(e));
+  //   };
+  //   handleFetch();
+  // }, []);
 
   let [fontsLoaded] = useFonts({
     Montserrat_600SemiBold,
@@ -64,6 +70,7 @@ const Tasks = ({ navigation, route }) => {
   if (!fontsLoaded) {
     return null;
   }
+
   return (
     <View style={styles.view}>
       <Image

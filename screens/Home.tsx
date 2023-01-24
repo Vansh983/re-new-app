@@ -356,7 +356,7 @@ const Home = ({ navigation }) => {
                 <Image
                   onPress={() => dispatch(setStage(0))}
                   source={{
-                    uri: "https://res.cloudinary.com/ddhqwgq8k/image/upload/v1674351297/re-new/Group_14-2_tdgafl.png",
+                    uri: "https://res.cloudinary.com/ddhqwgq8k/image/upload/v1674388244/re-new/Group_14-3_wqjdfn.png",
                   }}
                   style={styles.bannerC}
                 />

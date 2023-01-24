@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "./src/store";
 import { LogBox } from "react-native";
 import axios from "axios";
-// LogBox.ignoreAllLogs(true);
+LogBox.ignoreAllLogs(true);
 export default function App() {
   return (
     <NavigationContainer>
